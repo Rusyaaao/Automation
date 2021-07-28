@@ -22,7 +22,7 @@ print(index)
   """
 
 
-import numpy as np
+
 
 #def calculate(matrix:list)-> int:
 #...
@@ -31,12 +31,21 @@ import numpy as np
     #with open("example.txt", "r") as fd:
 
 data = []
+s = 0
 with open("d:/Automation/test/example.txt") as f:
     for line in f:
         data.append([int(x) for x in line.split()])
-
-print(data)
-
+  #  print([x for i in data for x in i].index(1))
+    
+for inner_list in data:
+    for number in inner_list:
+        if inner_list == 1:
+            s = inner_list.index
+        else:
+            continue
+print(data)        
+print(s)
+                   
 # Думаю, что дальше нужно использовать функциональное программирование
 # Просуммировать по осям и проверить, что сумма  > 1 ???
 
