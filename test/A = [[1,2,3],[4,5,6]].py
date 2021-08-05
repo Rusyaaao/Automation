@@ -1,63 +1,52 @@
-"""A = [[1,0],[1,1]]
-m = 0
-k = 0
-for i in range(len(A)):
-    if A[i]== 1:
-        m += 1 
-    for j in range(len(A[i])):
-        if  A[i][j] == 1:
-            k += 1
-sum = m+k
-print(sum)
+# Ищем все соседние значение 1. Посещенные значения 1 и 0 заменяем значением -1.
+
+def func_check_neighbors(matr, i, j):
+    if i >= 0 and i < len(matr) and j >= 0 and j < len(matr[0]):    
+        if matr[i][j] == 1:
+            matr[i][j] = -1
+            # соседние значения
+            func_check_neighbors(matr, i+1, j)
+            func_check_neighbors(matr, i, j+1)
+            func_check_neighbors(matr, i-1, j)
+            func_check_neighbors(matr, i, j-1)
+        else:
+            matr[i][j] = -1
+
+#
+def calculate(matr):
+    count = 0
+    for i in range(len(matr)):
+        for j in range(len(matr[i])):
+            if matr[i][j] == 1:
+                func_check_neighbors(matr, i, j)
+                count += 1
+    return count
+
+
+
+
+def main():
    
-massiv = [1,3,5,3,1]
- 
-for i in massiv:
-    if massiv.count(i) == 1:
-        print (massiv.index(i))
-      
+    matr = []
 
-index = massiv.index(1)
-print(index)
-  """
+    f = open("input.txt", "r")
 
+   
+    for line in f.readlines():
+        if line == "\n":    
+            print(calculate(matr))
+            matr.clear()
+        else:              
+            print(line.split('\n')[0])
+            matr.append([int(x) for x in line.split()])
 
-import numpy as np
+    if len(matr) != 0:
+        print(func_count(matr))
+        matr.clear()
 
-#def calculate(matrix:list)-> int:
-#...
-
-#def main()->None:
-    #with open("example.txt", "r") as fd:
-
-data = []
-with open("d:/Automation/test/example.txt") as f:
-    for line in f:
-        data.append([int(x) for x in line.split()])
-
-print(data)
-
-# Думаю, что дальше нужно использовать функциональное программирование
-# Просуммировать по осям и проверить, что сумма  > 1 ???
-
-"""
-def poisk(s):
-    return data.index(1)
+    f.close()
 
 
-map_object = map(poisk, data)
+if __name__ == "__main__":
+    main()
 
-print(list(map_object))
-
-
-
-
-print(A)
-i = 1
-for i in range(len(A)-1):
-    sum = int(A[i]) + int(A[i+1])
-    if sum > 1:
-        pass
-    else:   
-        pass
-        """
